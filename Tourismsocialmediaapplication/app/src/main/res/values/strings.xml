@@ -1,0 +1,187 @@
+<resources>
+
+    <string name="app_name">Fin-App</string>
+    <string name="age">Age</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Support</string>
+    <string name="noBathrooms">No. Bathrooms</string>
+    <string name="noBedrooms">No. Bedrooms</string>
+    <string name="livingSpaceText">Living space</string>
+    <string name="lotSpaceText">Lot space</string>
+    <string name="floorText">No. Floors</string>
+    <string name="waterfrontText">Waterfront</string>
+    <string name="viewsText">Views</string>
+    <string name="determineLoanTopText">Enter these details to help us determine your loan amount</string>
+    <string name="submit">Submit</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="conditon">Condition</string>
+    <string name="grade">Grade</string>
+    <string name="sqft_above">Sqft above</string>
+    <string name="sqft_basement">Sqft basement</string>
+    <string name="yr_built">Year built</string>
+    <string name="isRenovated">Is renovated</string>
+    <string name="genderText">Gender</string>
+    <string name="marriageText">Marriage</string>
+    <string name="dependantsText">Dependants</string>
+    <string name="educationText">Education</string>
+    <string name="selfEmployedText">Self-Employed</string>
+    <string name="financialHistoryText">Edit Financial Details</string>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="credit_history">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="house_type">
+        <item>Urban</item>
+        <item>Semi-Urban</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="marriage">
+        <item>Married</item>
+        <item>Not Married</item>
+    </string-array>
+    <string-array name="dependants">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3+</item>
+    </string-array>
+    <string-array name="education">
+        <item>Graduate</item>
+        <item>Not Graduate</item>
+    </string-array>
+    <string-array name="self_employed">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="bedroomNo">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6+</item>
+    </string-array>
+    <string-array name="bathroomNo">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6+</item>
+    </string-array>
+    <string-array name="livingSpace">
+        <item>500sqft or less</item>
+        <item>500sqft to 1000sqft</item>
+        <item>1000sqft to 2000sqft</item>
+        <item>2000sqft to 3000sqft</item>
+        <item>3000sqft to 4000sqft</item>
+        <item>4000sqft to 5000sqft</item>
+        <item>5000sqft to 6000sqft</item>
+        <item>6000sqft +</item>
+    </string-array>
+    <string-array name="lotSpace">
+        <item>1000sqft or less</item>
+        <item>1000sqft to 2000sqft</item>
+        <item>2000sqft to 3000sqft</item>
+        <item>3000sqft to 4000sqft</item>
+        <item>4000sqft to 5000sqft</item>
+        <item>5000sqft to 6000sqft</item>
+        <item>6000sqft +</item>
+    </string-array>
+    <string-array name="floors">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4+</item>
+    </string-array>
+    <string-array name="condition">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="waterfront">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
+    <string-array name="views">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4+</item>
+    </string-array>
+    <string-array name="cardType">
+        <item>Mastercard</item>
+        <item>Visa Debit</item>
+    </string-array>
+    <string-array name="cardMonth">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="cardYear">
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+    </string-array>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="name_email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="login_button">Log in</string>
+    <string name="title_activity_loan_officer_details">MainActivity</string>
+    <string name="officer_email">Email address</string>
+    <string name="officer_fname">First Name</string>
+    <string name="officer_lname">Last Name</string>
+    <string name="officer_password">Password</string>
+    <string name="officer_phonenumber">Phone Number</string>
+    <string name="title_activity_bank_details">MainActivity</string>
+    <string name="signup_activity_btn">Create a new account</string>
+    <string name="fname">First Name</string>
+    <string name="lName">Last Name</string>
+    <string name="pass">Password</string>
+    <string name="phone">Phone No.</string>
+    <string name="signup_btn">Sign Up</string>
+    <string name="login_activity_btn">Log in</string>
+    <string name="signup_email">Email</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="requestProfessionalTitle">Select the professional you want to review your application</string>
+    <string name="requestProfessionalFooter">Press the confirm button to send a request to your professional</string>
+    <string name="requestProfessionalPrice">Price premium € </string>
+    <string name="logout_button">Log Out</string>
+    <string name="forgotPassword">Forgot Password?</string>
+</resources>

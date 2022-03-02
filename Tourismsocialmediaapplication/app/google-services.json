@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1038528127030",
+    "project_id": "zinc-quest-329510",
+    "storage_bucket": "zinc-quest-329510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038528127030:android:a0fb59ec8b0c1120427897",
+        "android_client_info": {
+          "package_name": "mtu.tourismSocialMediaApplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038528127030-nf69d4ssu4lvi4fcnhs4n1676hqik4ac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbWM52NIYAImj94Pg_8XaNlyGVXe9Sgr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038528127030-nf69d4ssu4lvi4fcnhs4n1676hqik4ac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
