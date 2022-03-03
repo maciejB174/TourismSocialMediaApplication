@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import mtu.tourismSocialMediaApplication.LoggedUser;
 import mtu.tourismSocialMediaApplication.Objects.User;
 import mtu.tourismSocialMediaApplication.R;
+import mtu.tourismSocialMediaApplication.activities.home.HomeActivity;
 import mtu.tourismSocialMediaApplication.activities.signUp.SignUp;
 import mtu.tourismSocialMediaApplication.database.UserDetails;
 
@@ -104,6 +105,8 @@ public class LoginActivity extends FragmentActivity {
                         System.out.println("SignInWithEmail: Success");
                         FirebaseUser user = fauth.getCurrentUser();
                         System.out.println(user.getEmail());
+                        Intent intent =  new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
 //                        updateUI(user);
                     } else {
                         // If sign in fails, display a message to the user.
