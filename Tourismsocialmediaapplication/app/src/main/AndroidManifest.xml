@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TourismSocialMediaApplication">
         <activity
+            android:name=".activities.EventDisplay.EventDisplay"
+            android:exported="false" />
+        <activity
             android:name=".activities.home.HomeActivity"
             android:exported="false" />
         <activity

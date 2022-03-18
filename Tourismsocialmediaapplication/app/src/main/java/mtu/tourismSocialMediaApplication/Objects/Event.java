@@ -11,8 +11,10 @@ import mtu.tourismSocialMediaApplication.database.UserDetails;
 public class Event {
     public int id;
     public String title;
-    public User organiser;
-    public Location location;
+    public String organiser;
+    public String location;
+    public double latitude;
+    public double longitude;
     public LocalDateTime startTime;
     public LocalDateTime endTime;
     public float admissionRate;
@@ -26,7 +28,7 @@ public class Event {
     }
 
     public Event(int id, String title, float admissionRate, String description) {
-        this.id = id;
+        this.id = id;               
         this.title = title;
         this.admissionRate = admissionRate;
         this.description = description;
@@ -48,20 +50,34 @@ public class Event {
         this.title = title;
     }
 
-    public User getOrganiser() {
+    public String getOrganiser() {
         return organiser;
     }
 
-    public void setOrganiser(User organiser) {
+    public void setOrganiser(String organiser) {
         this.organiser = organiser;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() { return longitude; }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public LocalDateTime getStartTime() {

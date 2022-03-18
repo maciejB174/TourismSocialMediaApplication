@@ -29,22 +29,22 @@ public class UserDetails {
         eventReference.child(String.valueOf(user.id)).child("age").setValue(user.age);
     }
 
-    public void readUser(int id, final OnGetDataListener listener) {
-        DatabaseReference ref = firebaseDatabase.getReference("users/");
-        listener.onStart();
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    if (postSnapshot.getKey().equals(String.valueOf(id))) {
-                        listener.onSuccess(postSnapshot);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                listener.onFailed(error);
-            }
-        });
-    }
+//    public void readUser(int id, final OnGetDataListener listener) {
+//        DatabaseReference ref = firebaseDatabase.getReference("users/");
+//        listener.onStart();
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+//                    if (postSnapshot.getKey().equals(String.valueOf(id))) {
+//                        listener.onSuccess(postSnapshot);
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                listener.onFailed(error);
+//            }
+//        });
+//    }
 }

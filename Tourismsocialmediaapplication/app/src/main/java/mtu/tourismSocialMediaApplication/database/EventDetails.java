@@ -8,6 +8,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import mtu.tourismSocialMediaApplication.Objects.Event;
 
 public class EventDetails {
@@ -15,6 +18,8 @@ public class EventDetails {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://zinc-quest-329510-default-rtdb.europe-west1.firebasedatabase.app/");
     private DatabaseReference eventReference = firebaseDatabase.getReference("events");
     private static EventDetails ourInstance = new EventDetails();
+    public ArrayList<Event> allEvents = new ArrayList<>();
+    public Event currentEvent;
 
     public EventDetails() {
     }
@@ -25,32 +30,86 @@ public class EventDetails {
 
     public void writeEventDetails(Event event) {
         eventReference.child(String.valueOf(event.id)).child("title").setValue(event.title);
-//        eventReference.child(String.valueOf(event.id)).child("organiser").setValue(String.valueOf(event.organiser));
-//        eventReference.child(String.valueOf(event.id)).child("startTime").setValue(String.valueOf(event.startTime));
-//        eventReference.child(String.valueOf(event.id)).child("endTime").setValue(String.valueOf(event.endTime));
+        eventReference.child(String.valueOf(event.id)).child("organiser").setValue(String.valueOf(event.organiser));
+        eventReference.child(String.valueOf(event.id)).child("startTime").setValue(String.valueOf(event.startTime));
+        eventReference.child(String.valueOf(event.id)).child("endTime").setValue(String.valueOf(event.endTime));
         eventReference.child(String.valueOf(event.id)).child("admissionRate").setValue(String.valueOf(event.admissionRate));
         eventReference.child(String.valueOf(event.id)).child("description").setValue(event.description);
+        eventReference.child(String.valueOf(event.id)).child("location").setValue(event.location);
+        eventReference.child(String.valueOf(event.id)).child("latitude").setValue(event.latitude);
+        eventReference.child(String.valueOf(event.id)).child("longitude").setValue(event.longitude);
 //        eventReference.child(String.valueOf(event.id)).child("eventChat").child();
-//        eventReference.child(String.valueOf(event.id)).child("tags").child();
+        for (int i = 0; i < event.tags.size(); i ++) {
+            eventReference.child(String.valueOf(event.id)).child("tags").child("tag" + i).setValue(event.tags.get(i));
+        }
 //        eventReference.child(String.valueOf(event.id)).child("attendees").child();
     }
 
-    public void readEvent(int id, final OnGetDataListener listener) {
+    public void readAllEvents(final OnGetDataListener listener) {
         DatabaseReference ref = firebaseDatabase.getReference("events/");
         listener.onStart();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    if (postSnapshot.getKey().equals(String.valueOf(id))) {
-                        listener.onSuccess(postSnapshot);
+                    Event event = new Event(Integer.parseInt(postSnapshot.getKey()), postSnapshot.child("title").getValue(String.class), Float.valueOf(postSnapshot.child("admissionRate").getValue(String.class)), postSnapshot.child("description").getValue(String.class));
+                    event.setLocation(postSnapshot.child("location").getValue(String.class));
+                    event.setOrganiser(postSnapshot.child("organiser").getValue(String.class));
+                    event.setLatitude(postSnapshot.child("latitude").getValue(Double.class));
+                    event.setLongitude(postSnapshot.child("longitude").getValue(Double.class));
+                    event.setStartTime(LocalDateTime.parse(postSnapshot.child("startTime").getValue(String.class)));
+                    event.setEndTime(LocalDateTime.parse(postSnapshot.child("endTime").getValue(String.class)));
+                    ArrayList<String> tags = new ArrayList<>();
+                    for (DataSnapshot tagsSnapshot : postSnapshot.child("tags").getChildren()) {
+                        tags.add(tagsSnapshot.getValue(String.class));
                     }
+                    allEvents.add(event);
                 }
+                listener.onSuccess();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                listener.onFailed(error);
+                listener.onFailed();
             }
         });
+    }
+
+    public void readEvent(String title, final OnGetDataListener listener) {
+        DatabaseReference ref = firebaseDatabase.getReference("events/");
+        listener.onStart();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    if (postSnapshot.child("title").getValue(String.class).equals(title)) {
+                        Event event = new Event(Integer.parseInt(postSnapshot.getKey()), postSnapshot.child("title").getValue(String.class), Float.valueOf(postSnapshot.child("admissionRate").getValue(String.class)), postSnapshot.child("description").getValue(String.class));
+                        event.setLocation(postSnapshot.child("location").getValue(String.class));
+                        event.setOrganiser(postSnapshot.child("organiser").getValue(String.class));
+                        event.setLatitude(postSnapshot.child("latitude").getValue(Double.class));
+                        event.setLongitude(postSnapshot.child("longitude").getValue(Double.class));
+                        event.setStartTime(LocalDateTime.parse(postSnapshot.child("startTime").getValue(String.class)));
+                        event.setEndTime(LocalDateTime.parse(postSnapshot.child("endTime").getValue(String.class)));
+                        ArrayList<String> tags = new ArrayList<>();
+                        for (DataSnapshot tagsSnapshot : postSnapshot.child("tags").getChildren()) {
+                            tags.add(tagsSnapshot.getValue(String.class));
+                        }
+                        currentEvent = event;
+                    }
+                }
+                listener.onSuccess();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailed();
+            }
+        });
+    }
+
+    public ArrayList<Event> getAllEvents() {
+        return this.allEvents;
+    }
+
+    public Event getCurrentEvent() {
+        return this.currentEvent;
     }
 }

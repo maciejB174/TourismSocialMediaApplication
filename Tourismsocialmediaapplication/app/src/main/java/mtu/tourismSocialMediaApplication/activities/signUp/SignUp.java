@@ -37,6 +37,7 @@ public class SignUp extends AppCompatActivity {
     TextView terms;
     CheckBox termsBox;
     LoggedUser login = LoggedUser.getInstance();
+    UserDetails userDetails = UserDetails.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final User user = new User(username.getText().toString(), phone.getText().toString().toLowerCase(), email.getText().toString().toLowerCase(),
-                        Integer.parseInt(age.getText().toString()), password.getText().toString());
+                        Integer.parseInt(age.getText().toString()));
 
                 if (TextUtils.isEmpty(user.getUsername())) {
                     username.setError("Please Enter a Username!");
@@ -107,15 +108,16 @@ public class SignUp extends AppCompatActivity {
                     username.setError("Please Enter a Phone Number");
                     return;
                 }
-                if (TextUtils.isEmpty(user.getPassword())) {
-                    email.setError("Please Enter a Password");
+                String passwordText = password.getText().toString();
+                if (passwordText.matches("")) {
+                    password.setError("Please Enter a Password");
                     return;
                 }
                 if (user.getAge() == 0) {
                     email.setError("Please Enter your age");
                     return;
                 }
-                if (user.getPassword().length() < 8) {
+                if (passwordText.length() < 8) {
                     password.setError("Password must be at least 8 characters!");
                     return;
                 }
@@ -127,13 +129,14 @@ public class SignUp extends AppCompatActivity {
                 users.child(user.getUsername()).setValue(user);
                 login.setLoggedUser(user);
 
-                fAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(user.getEmail(), passwordText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(SignUp.this, LoginActivity.class);
                             startActivity(intent);
                             Toast.makeText(SignUp.this, "Sign up successful", Toast.LENGTH_SHORT).show();
+                            userDetails.writeUserDetails(user);
                         } else {
                             Toast.makeText(SignUp.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
 

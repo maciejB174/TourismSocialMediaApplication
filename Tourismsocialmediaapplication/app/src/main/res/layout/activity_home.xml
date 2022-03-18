@@ -7,6 +7,7 @@
     android:background="@drawable/background"
     tools:context=".activities.home.HomeActivity">
 
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="150dp"
@@ -14,15 +15,15 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="117dp"
         android:contentDescription="Logo"
-        android:src="@drawable/applicationLogo"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:src="@drawable/applicationlogo"
+        app:layout_constraintBottom_toTopOf="@+id/MapButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ImageContrastCheck" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/MapButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="98dp"
@@ -34,38 +35,41 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/PastEventsButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
+        android:layout_marginTop="29dp"
         android:layout_marginEnd="99dp"
         android:text="Past Events"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="418dp" />
+        app:layout_constraintTop_toBottomOf="@+id/recommendedEventsButton" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/SignOutButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
+        android:layout_marginTop="31dp"
         android:layout_marginEnd="99dp"
         android:text="Sign Out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="497dp" />
+        app:layout_constraintTop_toBottomOf="@+id/PastEventsButton" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/recommendedEventsButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
+        android:layout_marginTop="29dp"
         android:layout_marginEnd="99dp"
         android:text="Recommended Events"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="341dp" />
+        app:layout_constraintTop_toBottomOf="@+id/MapButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
