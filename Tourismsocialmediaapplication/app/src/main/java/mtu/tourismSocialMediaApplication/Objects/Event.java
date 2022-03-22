@@ -1,9 +1,13 @@
 package mtu.tourismSocialMediaApplication.Objects;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.provider.Telephony;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import mtu.tourismSocialMediaApplication.database.Message;
 import mtu.tourismSocialMediaApplication.database.UserDetails;
@@ -27,11 +31,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(int id, String title, float admissionRate, String description) {
-        this.id = id;               
+    public Event(String title, String location, float admissionRate) {
         this.title = title;
         this.admissionRate = admissionRate;
-        this.description = description;
+        this.location = location;
     }
 
     public int getId() {

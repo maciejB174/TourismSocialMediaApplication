@@ -13,7 +13,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import mtu.tourismSocialMediaApplication.MapsActivity;
 import mtu.tourismSocialMediaApplication.R;
+import mtu.tourismSocialMediaApplication.activities.createEvent.CreateEvent;
 import mtu.tourismSocialMediaApplication.activities.login.LoginActivity;
+import mtu.tourismSocialMediaApplication.activities.createEvent.CreateEvent;
 import mtu.tourismSocialMediaApplication.activities.signUp.SignUp;
 
 public class HomeActivity extends AppCompatActivity {
@@ -22,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button recommendedEventsButton;
     private Button pastEventsButton;
     private Button signOutButton;
+    private Button createEventButton;
     private DatabaseReference users;
     private FirebaseAuth fauth;
 
@@ -34,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         recommendedEventsButton = findViewById(R.id.recommendedEventsButton);
         pastEventsButton = findViewById(R.id.PastEventsButton);
         signOutButton = findViewById(R.id.SignOutButton);
+        createEventButton = findViewById(R.id.createEventButton);
 
         users = FirebaseDatabase.getInstance("https://zinc-quest-329510-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("clients");
         fauth = FirebaseAuth.getInstance();
@@ -42,6 +46,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(HomeActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        createEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(HomeActivity.this, CreateEvent.class);
                 startActivity(intent);
             }
         });

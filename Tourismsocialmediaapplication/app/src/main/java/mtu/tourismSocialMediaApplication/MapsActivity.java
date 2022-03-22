@@ -1,30 +1,22 @@
 package mtu.tourismSocialMediaApplication;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 
 import mtu.tourismSocialMediaApplication.Objects.Event;
-import mtu.tourismSocialMediaApplication.Objects.User;
-import mtu.tourismSocialMediaApplication.activities.EventDisplay.EventDisplay;
-import mtu.tourismSocialMediaApplication.activities.home.HomeActivity;
+import mtu.tourismSocialMediaApplication.activities.eventDisplay.EventDisplay;
 import mtu.tourismSocialMediaApplication.database.EventDetails;
 import mtu.tourismSocialMediaApplication.database.OnGetDataListener;
 import mtu.tourismSocialMediaApplication.database.UserDetails;

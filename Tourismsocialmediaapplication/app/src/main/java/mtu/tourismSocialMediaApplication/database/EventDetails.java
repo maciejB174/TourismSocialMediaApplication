@@ -29,19 +29,19 @@ public class EventDetails {
     }
 
     public void writeEventDetails(Event event) {
-        eventReference.child(String.valueOf(event.id)).child("title").setValue(event.title);
-        eventReference.child(String.valueOf(event.id)).child("organiser").setValue(String.valueOf(event.organiser));
-        eventReference.child(String.valueOf(event.id)).child("startTime").setValue(String.valueOf(event.startTime));
-        eventReference.child(String.valueOf(event.id)).child("endTime").setValue(String.valueOf(event.endTime));
-        eventReference.child(String.valueOf(event.id)).child("admissionRate").setValue(String.valueOf(event.admissionRate));
-        eventReference.child(String.valueOf(event.id)).child("description").setValue(event.description);
-        eventReference.child(String.valueOf(event.id)).child("location").setValue(event.location);
-        eventReference.child(String.valueOf(event.id)).child("latitude").setValue(event.latitude);
-        eventReference.child(String.valueOf(event.id)).child("longitude").setValue(event.longitude);
+        eventReference.child(String.valueOf(event.title)).child("title").setValue(event.title);
+        eventReference.child(String.valueOf(event.title)).child("organiser").setValue(String.valueOf(event.organiser));
+        eventReference.child(String.valueOf(event.title)).child("startTime").setValue(String.valueOf(event.startTime));
+        eventReference.child(String.valueOf(event.title)).child("endTime").setValue(String.valueOf(event.endTime));
+        eventReference.child(String.valueOf(event.title)).child("admissionRate").setValue(String.valueOf(event.admissionRate));
+        eventReference.child(String.valueOf(event.title)).child("description").setValue(event.description);
+        eventReference.child(String.valueOf(event.title)).child("location").setValue(event.location);
+        eventReference.child(String.valueOf(event.title)).child("latitude").setValue(event.latitude);
+        eventReference.child(String.valueOf(event.title)).child("longitude").setValue(event.longitude);
 //        eventReference.child(String.valueOf(event.id)).child("eventChat").child();
-        for (int i = 0; i < event.tags.size(); i ++) {
-            eventReference.child(String.valueOf(event.id)).child("tags").child("tag" + i).setValue(event.tags.get(i));
-        }
+//        for (int i = 0; i < event.tags.size(); i ++) {
+//            eventReference.child(String.valueOf(event.id)).child("tags").child("tag" + i).setValue(event.tags.get(i));
+//        }
 //        eventReference.child(String.valueOf(event.id)).child("attendees").child();
     }
 
@@ -52,8 +52,8 @@ public class EventDetails {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Event event = new Event(Integer.parseInt(postSnapshot.getKey()), postSnapshot.child("title").getValue(String.class), Float.valueOf(postSnapshot.child("admissionRate").getValue(String.class)), postSnapshot.child("description").getValue(String.class));
-                    event.setLocation(postSnapshot.child("location").getValue(String.class));
+                    Event event = new Event(postSnapshot.child("title").getValue(String.class), postSnapshot.child("location").getValue(String.class), Float.valueOf(postSnapshot.child("admissionRate").getValue(String.class)));
+                    event.setDescription(postSnapshot.child("description").getValue(String.class));
                     event.setOrganiser(postSnapshot.child("organiser").getValue(String.class));
                     event.setLatitude(postSnapshot.child("latitude").getValue(Double.class));
                     event.setLongitude(postSnapshot.child("longitude").getValue(Double.class));
@@ -82,8 +82,8 @@ public class EventDetails {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     if (postSnapshot.child("title").getValue(String.class).equals(title)) {
-                        Event event = new Event(Integer.parseInt(postSnapshot.getKey()), postSnapshot.child("title").getValue(String.class), Float.valueOf(postSnapshot.child("admissionRate").getValue(String.class)), postSnapshot.child("description").getValue(String.class));
-                        event.setLocation(postSnapshot.child("location").getValue(String.class));
+                        Event event = new Event(postSnapshot.child("title").getValue(String.class), postSnapshot.child("location").getValue(String.class), Float.valueOf(postSnapshot.child("admissionRate").getValue(String.class)));
+                        event.setDescription(postSnapshot.child("description").getValue(String.class));
                         event.setOrganiser(postSnapshot.child("organiser").getValue(String.class));
                         event.setLatitude(postSnapshot.child("latitude").getValue(Double.class));
                         event.setLongitude(postSnapshot.child("longitude").getValue(Double.class));

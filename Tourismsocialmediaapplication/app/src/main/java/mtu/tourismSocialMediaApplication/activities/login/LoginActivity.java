@@ -34,9 +34,6 @@ import mtu.tourismSocialMediaApplication.database.UserDetails;
 
 public class LoginActivity extends FragmentActivity {
 
-    private UserDetails userDetails = UserDetails.getInstance();
-    private User currentUser;
-    private LoggedUser loggedUser = LoggedUser.getInstance();
 //    private MessageList messages = MessageList.getInstance();
     private static EditText email;
     private static EditText password;
