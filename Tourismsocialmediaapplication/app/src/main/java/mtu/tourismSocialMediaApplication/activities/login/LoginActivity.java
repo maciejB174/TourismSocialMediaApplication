@@ -24,8 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 import mtu.tourismSocialMediaApplication.LoggedUser;
 import mtu.tourismSocialMediaApplication.Objects.User;
+import mtu.tourismSocialMediaApplication.Objects.UserEvents;
 import mtu.tourismSocialMediaApplication.R;
 import mtu.tourismSocialMediaApplication.activities.home.HomeActivity;
 import mtu.tourismSocialMediaApplication.activities.signUp.SignUp;
@@ -40,6 +43,7 @@ public class LoginActivity extends FragmentActivity {
     private Button loginButton;
     private Button signUpButton;
     private DatabaseReference users;
+    private UserEvents userEvents = UserEvents.getInstance();
     private TextView forgot_password;
     private FirebaseAuth fauth;
 
@@ -49,8 +53,8 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
         email = findViewById(R.id.editEmailP);
         password = findViewById(R.id.editTextTextPassword);
-        loginButton = findViewById(R.id.signupButton);
-        signUpButton = findViewById(R.id.submit_Button);
+        loginButton = findViewById(R.id.loginButton);
+        signUpButton = findViewById(R.id.signupButton);
         forgot_password = findViewById(R.id.forgot_password);
         users = FirebaseDatabase.getInstance("https://zinc-quest-329510-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("clients");
         fauth = FirebaseAuth.getInstance();
@@ -59,7 +63,6 @@ public class LoginActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(LoginActivity.this, SignUp.class);
-                System.out.println("Hello world");
                 startActivity(intent);
             }
         });
@@ -101,6 +104,9 @@ public class LoginActivity extends FragmentActivity {
                         // Sign in success, update UI with the signed-in user's information
                         System.out.println("SignInWithEmail: Success");
                         FirebaseUser user = fauth.getCurrentUser();
+                        LoggedUser.getInstance().setLoggedUser(useremail.toLowerCase());
+                        userEvents.setUserEmail(useremail);
+                        userEvents.findUserEvents();
                         System.out.println(user.getEmail());
                         Intent intent =  new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);

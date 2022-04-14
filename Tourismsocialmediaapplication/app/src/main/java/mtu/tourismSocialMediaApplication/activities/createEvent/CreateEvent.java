@@ -1,32 +1,28 @@
 package mtu.tourismSocialMediaApplication.activities.createEvent;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import mtu.tourismSocialMediaApplication.LoggedUser;
-import mtu.tourismSocialMediaApplication.Objects.Event;
 import mtu.tourismSocialMediaApplication.R;
 import mtu.tourismSocialMediaApplication.activities.home.HomeActivity;
 import mtu.tourismSocialMediaApplication.database.EventDetails;
@@ -36,11 +32,12 @@ public class CreateEvent extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseDatabase database;
     DatabaseReference users;
-    EventDetails eventDetails = EventDetails.getInstance();
 
-    EditText title, description, location, admissionRate;
+    EditText title, description, admissionRate;
+    Spinner tag1, tag2, tag3, tag4;
     Button backButton, hostEventButton;
-    LoggedUser login = LoggedUser.getInstance();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +50,14 @@ public class CreateEvent extends AppCompatActivity {
 
         title = findViewById(R.id.titleEdit);
         description = findViewById(R.id.descriptionEdit);
-        location = findViewById(R.id.locationEdit);
+        tag1 = findViewById(R.id.tag1);
+        tag2 = findViewById(R.id.tag2);
+        tag3 = findViewById(R.id.tag3);
+        tag4 = findViewById(R.id.tag4);
         admissionRate = findViewById(R.id.admissionRateEdit);
 
-        backButton = findViewById(R.id.backCreateEvent1Button);
-        hostEventButton = findViewById(R.id.nextEventButton);
+        backButton = findViewById(R.id.backCreateEventButton);
+        hostEventButton = findViewById(R.id.nextEventButton1);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,42 +72,34 @@ public class CreateEvent extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
                 String titleText = title.getText().toString();
                 if (titleText.isEmpty()) {
                     title.setError("Please Enter a Title!");
                     return;
                 }
 
-                String locationText = location.getText().toString();
-                if (locationText.isEmpty()) {
-                    location.setError("Please Enter a Location!");
-                    return;
-                }
+                Intent intent = new Intent(CreateEvent.this, CreateEvent1.class);
 
-                List<Address> addresses = new ArrayList<Address>();
-                Geocoder geocoder = new Geocoder(getApplicationContext());
-                try {
-                    addresses = geocoder.getFromLocationName(locationText, 5);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                for (int i = 0; i < addresses.size(); i ++) {
-                    System.out.println(addresses.get(i));
-                }
+                String tag1Text = tag1.getSelectedItem().toString();
+                String tag2Text = tag2.getSelectedItem().toString();
+                String tag3Text = tag3.getSelectedItem().toString();
+                String tag4Text = tag4.getSelectedItem().toString();
+                ArrayList<String> tags = new ArrayList<>();
+                tags.add(tag1Text);
+                tags.add(tag2Text);
+                tags.add(tag3Text);
+                tags.add(tag4Text);
 
-                Intent intent = new Intent(CreateEvent.this, CreateEvent2.class);
                 intent.putExtra("title", titleText);
-                intent.putExtra("location", locationText);
                 intent.putExtra("admissionRate", Float.parseFloat(admissionRate.getText().toString()));
-
+                intent.putExtra("tags", tags);
                 String descriptionText = description.getText().toString();
                 if (!descriptionText.isEmpty()) {
                     intent.putExtra("description", descriptionText);
                 }
-
                 startActivity(intent);
             }
         });
     }
+
 }

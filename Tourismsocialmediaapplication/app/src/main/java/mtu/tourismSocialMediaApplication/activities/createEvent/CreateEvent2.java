@@ -43,7 +43,6 @@ public class CreateEvent2 extends AppCompatActivity {
     DatePicker date;
     TimePicker startTime;
     Button backButton, hostEventButton;
-    LoggedUser login = LoggedUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +82,20 @@ public class CreateEvent2 extends AppCompatActivity {
 
                 String title = getIntent().getStringExtra("title");
                 String location = getIntent().getStringExtra("location");
+                ArrayList<String> tags = getIntent().getStringArrayListExtra("tags");
                 String description = getIntent().getStringExtra("description");
                 float admissionRate = getIntent().getFloatExtra("admissionRate", 0);
+                double latitude = getIntent().getDoubleExtra("latitude", 0);
+                double longitude = getIntent().getDoubleExtra("longitude", 0);
                 FirebaseUser user = fAuth.getCurrentUser();
 
                 final Event event = new Event(title, location, admissionRate);
                 event.setStartTime(time);
                 event.setDescription(description);
                 event.setOrganiser(user.getEmail());
+                event.setLatitude(latitude);
+                event.setLongitude(longitude);
+                event.setTags(tags);
 
                 eventDetails.writeEventDetails(event);
 

@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mtu.tourismSocialMediaApplication">
+    package="mtu.tourismSocialMediaApplication" >
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Tourism Social Media Application"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TourismSocialMediaApplication">
+        android:theme="@style/Theme.TourismSocialMediaApplication" >
+        <activity
+            android:name=".activities.upcomingEvents.UpcomingEvent"
+            android:exported="false" />
+        <activity
+            android:name=".activities.pastEvents.PastEvent"
+            android:exported="false" />
+        <activity
+            android:name=".activities.createEvent.CreateEvent1"
+            android:exported="false" />
         <activity
             android:name=".activities.createEvent.CreateEvent2"
             android:exported="false" />
@@ -45,7 +54,7 @@
         <activity
             android:name=".activities.login.LoginActivity"
             android:exported="true"
-            android:label="@string/noBathrooms">
+            android:label="Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

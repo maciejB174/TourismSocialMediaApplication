@@ -127,7 +127,6 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 users.child(user.getUsername()).setValue(user);
-                login.setLoggedUser(user);
 
                 fAuth.createUserWithEmailAndPassword(user.getEmail(), passwordText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

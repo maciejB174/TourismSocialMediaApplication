@@ -12,17 +12,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import mtu.tourismSocialMediaApplication.MapsActivity;
+import mtu.tourismSocialMediaApplication.Objects.User;
+import mtu.tourismSocialMediaApplication.Objects.UserEvents;
 import mtu.tourismSocialMediaApplication.R;
 import mtu.tourismSocialMediaApplication.activities.createEvent.CreateEvent;
 import mtu.tourismSocialMediaApplication.activities.login.LoginActivity;
 import mtu.tourismSocialMediaApplication.activities.createEvent.CreateEvent;
+import mtu.tourismSocialMediaApplication.activities.pastEvents.PastEvent;
 import mtu.tourismSocialMediaApplication.activities.signUp.SignUp;
+import mtu.tourismSocialMediaApplication.activities.upcomingEvents.UpcomingEvent;
 
 public class HomeActivity extends AppCompatActivity {
 
     private Button mapButton;
     private Button recommendedEventsButton;
     private Button pastEventsButton;
+    private Button upcomingEventsButton;
     private Button signOutButton;
     private Button createEventButton;
     private DatabaseReference users;
@@ -36,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         mapButton = findViewById(R.id.MapButton);
         recommendedEventsButton = findViewById(R.id.recommendedEventsButton);
         pastEventsButton = findViewById(R.id.PastEventsButton);
+        upcomingEventsButton = findViewById(R.id.UpcomingEventsButton);
         signOutButton = findViewById(R.id.SignOutButton);
         createEventButton = findViewById(R.id.createEventButton);
 
@@ -54,6 +60,22 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(HomeActivity.this, CreateEvent.class);
+                startActivity(intent);
+            }
+        });
+
+        upcomingEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(HomeActivity.this, UpcomingEvent.class);
+                startActivity(intent);
+            }
+        });
+
+        pastEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(HomeActivity.this, PastEvent.class);
                 startActivity(intent);
             }
         });

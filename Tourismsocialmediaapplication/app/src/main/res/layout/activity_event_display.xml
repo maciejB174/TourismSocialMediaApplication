@@ -24,7 +24,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="wrap_content"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -163,28 +163,7 @@
             android:layout_height="26dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/EndTimeSetText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="End Time"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/EndTimeText"
-                android:layout_width="118dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:focusable="false"
-                android:text="EndTimeInfo"
-                android:textSize="20sp" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/TagsSetText"
@@ -192,6 +171,48 @@
             android:layout_height="30dp"
             android:text="Tags"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tagsDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/backEventDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Back" />
+
+            <Button
+                android:id="@+id/messageEventDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Message" />
+
+            <Button
+                android:id="@+id/signUpEventDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sign Up" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -9,7 +9,7 @@
     android:paddingTop="?attr/actionBarSize">
 
     <Button
-        android:id="@+id/nextEventButton1"
+        android:id="@+id/nextEventButton2"
         android:layout_width="144dp"
         android:layout_height="40dp"
         android:layout_marginStart="43dp"
@@ -20,11 +20,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/backCreateEventButton"
+        app:layout_constraintStart_toEndOf="@+id/backCreateEvent1Button"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/backCreateEventButton"
+        android:id="@+id/backCreateEvent1Button"
         android:layout_width="144dp"
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
@@ -35,101 +35,70 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <Spinner
-        android:id="@+id/tag1"
-        android:layout_width="210dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/et_background"
-        android:ems="10"
-        android:entries="@array/tags"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admissionRateEdit" />
-
-    <Spinner
-        android:id="@+id/tag2"
-        android:layout_width="210dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/et_background"
-        android:entries="@array/tags"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tag1" />
-
-    <Spinner
-        android:id="@+id/tag3"
-        android:layout_width="210dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/et_background"
-        android:ems="10"
-        android:entries="@array/tags"
-        android:inputType="textMultiLine"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tag2" />
-
-    <Spinner
-        android:id="@+id/tag4"
-        android:layout_width="210dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/et_background"
-        android:ems="10"
-        android:entries="@array/tags"
-        android:inputType="textMultiLine"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tag3" />
-
     <EditText
-        android:id="@+id/admissionRateEdit"
+        android:id="@+id/townCityEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/et_background"
         android:ems="10"
-        android:hint="Admission Rate € *"
-        android:inputType="number"
+        android:hint="Town / City"
+        android:inputType="textPersonName"
         android:padding="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/addressLine2Edit" />
 
     <EditText
-        android:id="@+id/titleEdit"
+        android:id="@+id/countyProvinceEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/et_background"
         android:ems="10"
-        android:hint="Title *"
+        android:hint="county / Province"
+        android:inputType="textPersonName"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/townCityEdit" />
+
+    <EditText
+        android:id="@+id/addressLine1Edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/et_background"
+        android:ems="10"
+        android:hint="Address Line 1"
         android:inputType="textPersonName"
         android:padding="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/descriptionEdit"
+        android:id="@+id/addressLine2Edit"
         android:layout_width="210dp"
-        android:layout_height="72dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/et_background"
-        android:hint="Description"
-        android:inputType="textMultiLine"
+        android:hint="Address Line 2"
+        android:inputType="textPersonName"
         android:padding="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/addressLine1Edit" />
+
+    <Spinner
+        android:id="@+id/countrySpinner"
+        android:layout_width="210dp"
+        android:layout_height="46dp"
+        android:entries="@array/country"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countyProvinceEdit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ public class LoggedUser {
 
     private static LoggedUser ourInstance = new LoggedUser();
 
-    private User loggedUser;
+    private String email;
 
     public void clear() {
         ourInstance = new LoggedUser();
@@ -16,11 +16,11 @@ public class LoggedUser {
         return ourInstance;
     }
 
-    public User getLoggedUser() {
-        return loggedUser;
+    public String getLoggedUser() {
+        return email;
     }
 
-    public void setLoggedUser(User loggedUser) {
-        this.loggedUser = loggedUser;
+    public void setLoggedUser(String loggedUser) {
+        this.email = loggedUser;
     }
 }
