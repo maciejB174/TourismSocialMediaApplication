@@ -1,9 +1,12 @@
 package mtu.tourismSocialMediaApplication.activities.login;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 import mtu.tourismSocialMediaApplication.LoggedUser;
@@ -32,12 +37,12 @@ import mtu.tourismSocialMediaApplication.Objects.UserEvents;
 import mtu.tourismSocialMediaApplication.R;
 import mtu.tourismSocialMediaApplication.activities.home.HomeActivity;
 import mtu.tourismSocialMediaApplication.activities.signUp.SignUp;
+import mtu.tourismSocialMediaApplication.database.MessageList;
 import mtu.tourismSocialMediaApplication.database.UserDetails;
 
 
 public class LoginActivity extends FragmentActivity {
 
-//    private MessageList messages = MessageList.getInstance();
     private static EditText email;
     private static EditText password;
     private Button loginButton;
@@ -55,7 +60,6 @@ public class LoginActivity extends FragmentActivity {
         password = findViewById(R.id.editTextTextPassword);
         loginButton = findViewById(R.id.loginButton);
         signUpButton = findViewById(R.id.signupButton);
-        forgot_password = findViewById(R.id.forgot_password);
         users = FirebaseDatabase.getInstance("https://zinc-quest-329510-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("clients");
         fauth = FirebaseAuth.getInstance();
 
@@ -73,14 +77,6 @@ public class LoginActivity extends FragmentActivity {
                 login(email.getText().toString(),password.getText().toString());
             }
         });
-
-//        forgot_password.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this, ForgottenPasswordActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void login(final String useremail, final String userpassword) {
@@ -121,47 +117,5 @@ public class LoginActivity extends FragmentActivity {
                 }
             });
         }
-//
-//            fauth.signInWithEmailAndPassword(useremail.toLowerCase(), userpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if (task.isSuccessful()) {
-//                        users.addListenerForSingleValueEvent(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                for (final DataSnapshot postSnapshot : snapshot.getChildren()) {
-//                                    if (postSnapshot.child("email").getValue().toString().equals(useremail)) {
-//                                        currentUser.setUsername(postSnapshot.child("username").getValue().toString());
-//                                        currentUser.setPassword(userpassword);
-//                                        currentUser.setAge(Integer.parseInt((String) postSnapshot.child("age").getValue()));
-//                                        currentUser.setEmail(useremail);
-//                                        currentUser.setPhoneNo(postSnapshot.child("phoneNo").getValue().toString());
-//                                        currentUser.setId(Integer.parseInt((String) postSnapshot.child("id").getValue()));
-////                                        if (loginDetails.financialDetailsPresent()) {
-////                                            loginDetails.runLoanSuitability();
-////                                        }
-//                                        loggedUser.setLoggedUser(currentUser);
-//                                        System.out.println(currentUser.getEmail());
-////                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-////                                        startActivity(intent);
-//                                        Toast.makeText(LoginActivity.this, "Successful login!", Toast.LENGTH_SHORT).show();
-//
-//                                    }
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError error) {
-//                                System.out.println("Cancelled");
-//                            }
-//                        });
-//
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Incorrect email or password", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//        }
     }
 }

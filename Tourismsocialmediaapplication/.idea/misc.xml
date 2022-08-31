@@ -8,19 +8,24 @@
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/drawable/button_background.xml" value="0.3215" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/drawable/et_background.xml" value="0.3215" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3215" />
+        <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_chat.xml" value="0.3625" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_create_event.xml" value="0.25" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_create_event1.xml" value="0.14895833333333333" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_create_event2.xml" value="0.22" />
+        <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_edit_event.xml" value="0.33" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_event_display.xml" value="0.33" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_home.xml" value="0.3625" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_login.xml" value="0.18541666666666667" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_maps.xml" value="0.3625" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_past_event.xml" value="0.3625" />
+        <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_rate_event.xml" value="0.21510416666666668" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_sign_out.xml" value="0.18" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_sign_up.xml" value="0.18541666666666667" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/activity_upcoming_event.xml" value="0.3625" />
         <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/line_for_activity_view.xml" value="0.3625" />
+        <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/popup_example.xml" value="0.21510416666666668" />
+        <entry key="..\:/FYP/project implementation/Tourismsocialmediaapplication/app/src/main/res/layout/suggested_event.xml" value="0.21510416666666668" />
         <entry key="..\:/Users/HP/Schoolwork/3rd Year S1/mobile devices/Tourismsocialmediaapplication/app/src/main/res/layout/activity_maps.xml" value="0.13802083333333334" />
       </map>
     </option>

@@ -25,7 +25,7 @@ public class Event {
     public String description;
     public ArrayList<Message> eventChat;
     public ArrayList<String> tags;
-    public ArrayList<User> attendees;
+    public ArrayList<String> attendees;
     public int noAttendees;
 
 
@@ -132,11 +132,11 @@ public class Event {
         this.tags = tags;
     }
 
-    public ArrayList<User> getAttendees() {
+    public ArrayList<String> getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(ArrayList<User> attendees) {
+    public void setAttendees(ArrayList<String> attendees) {
         this.attendees = attendees;
     }
 

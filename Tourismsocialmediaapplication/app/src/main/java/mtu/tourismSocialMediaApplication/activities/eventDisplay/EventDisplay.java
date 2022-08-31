@@ -14,15 +14,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import mtu.tourismSocialMediaApplication.LoggedUser;
 import mtu.tourismSocialMediaApplication.MapsActivity;
 import mtu.tourismSocialMediaApplication.Objects.Event;
 import mtu.tourismSocialMediaApplication.Objects.User;
+import mtu.tourismSocialMediaApplication.Objects.UserEvents;
 import mtu.tourismSocialMediaApplication.R;
+import mtu.tourismSocialMediaApplication.activities.editEvent.EditEvent;
 import mtu.tourismSocialMediaApplication.activities.home.HomeActivity;
+import mtu.tourismSocialMediaApplication.activities.message.ChatActivity;
 import mtu.tourismSocialMediaApplication.database.EventDetails;
+import mtu.tourismSocialMediaApplication.database.MessageList;
 import mtu.tourismSocialMediaApplication.database.OnGetDataListener;
 
 public class EventDisplay extends AppCompatActivity {
@@ -36,8 +42,9 @@ public class EventDisplay extends AppCompatActivity {
     private TextView startTimeInfo;
     private TextView endTimeInfo;
     private TextView tagsDescription;
-    private Button back, message, signUp;
+    private Button back, message, signUp, signOut, editEvent, cancelEvent;
     private Event event;
+    private UserEvents userEvents = UserEvents.getInstance();
 
     private LoggedUser currentUser = LoggedUser.getInstance();
 
@@ -56,6 +63,14 @@ public class EventDisplay extends AppCompatActivity {
         back = findViewById(R.id.backEventDisplay);
         message = findViewById(R.id.messageEventDisplay);
         signUp = findViewById(R.id.signUpEventDisplay);
+        signOut = findViewById(R.id.signOutEventDisplay);
+        editEvent = findViewById(R.id.editEvent);
+        cancelEvent = findViewById(R.id.cancelEvent);
+
+        message.setVisibility(View.GONE);
+        signOut.setVisibility(View.GONE);
+        editEvent.setVisibility(View.GONE);
+        cancelEvent.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
@@ -69,6 +84,20 @@ public class EventDisplay extends AppCompatActivity {
                 descriptionInfo.setText(currentEvent.getDescription());
                 locationInfo.setText(currentEvent.getLocation());
                 organiserInfo.setText(currentEvent.getOrganiser());
+                if (currentEvent.getOrganiser().equals(currentUser.getLoggedUser())) {
+                    signUp.setVisibility(View.GONE);
+                    message.setVisibility(View.VISIBLE);
+                    editEvent.setVisibility(View.VISIBLE);
+                    cancelEvent.setVisibility(View.VISIBLE);
+                }
+                ArrayList<String> attendees = event.getAttendees();
+                for (int i = 0; i < attendees.size(); i ++) {
+                    if (currentUser.getLoggedUser().equals(attendees.get(i))) {
+                        message.setVisibility(View.VISIBLE);
+                        signOut.setVisibility(View.VISIBLE);
+                        signUp.setVisibility(View.GONE);
+                    }
+                }
                 admissionRateInfo.setText("€" + String.valueOf(currentEvent.getAdmissionRate()));
                 startTimeInfo.setText(String.valueOf(currentEvent.getStartTime()));
                 if (currentEvent.getTags() != null) {
@@ -105,6 +134,29 @@ public class EventDisplay extends AppCompatActivity {
             }
         });
 
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MessageList messageList = MessageList.getInstance();
+                messageList.getMessagesForEvent(intent.getStringExtra("title"), new OnGetDataListener() {
+                    @Override
+                    public void onSuccess() {
+                        Intent messageIntent = new Intent(EventDisplay.this, ChatActivity.class);
+                        messageIntent.putExtra("title", intent.getStringExtra("title"));
+                        startActivity(messageIntent);
+                    }
+
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onFailed() {
+                    }
+                });
+            }
+        });
+
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +165,70 @@ public class EventDisplay extends AppCompatActivity {
                 Intent homeIntent = new Intent(EventDisplay.this, HomeActivity.class);
                 Toast.makeText(EventDisplay.this, "Signed up successfully", Toast.LENGTH_SHORT).show();
                 startActivity(homeIntent);
+            }
+        });
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user = currentUser.getLoggedUser();
+                eventDetails.signOutUser(event, user, new OnGetDataListener() {
+                    @Override
+                    public void onSuccess() {
+                        userEvents.findUserEvents();
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onFailed() {
+
+                    }
+                });
+                Intent homeIntent = new Intent(EventDisplay.this, HomeActivity.class);
+                Toast.makeText(EventDisplay.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
+                startActivity(homeIntent);
+            }
+        });
+
+        editEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocalDateTime localDateTime = LocalDateTime.now();
+                LocalDateTime eventTime = event.getStartTime();
+                LocalDateTime cutoffPoint = eventTime.minus(1, ChronoUnit.DAYS);
+                if (localDateTime.isAfter(cutoffPoint)) {
+                    Toast.makeText(EventDisplay.this, "Too late to edit event", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent editIntent = new Intent(EventDisplay.this, EditEvent.class);
+                    editIntent.putExtra("title", event.getTitle());
+                    startActivity(editIntent);
+                }
+
+            }
+        });
+
+        cancelEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocalDateTime localDateTime = LocalDateTime.now();
+                LocalDateTime eventTime = event.getStartTime();
+                LocalDateTime cutoffPoint = eventTime.minus(1, ChronoUnit.DAYS);
+                if (localDateTime.isAfter(cutoffPoint)) {
+                    Toast.makeText(EventDisplay.this, "Too late to cancel event", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    eventDetails.cancelEvent(event.getTitle());
+                    userEvents.findUserEvents();
+                    Toast.makeText(EventDisplay.this, "Successfully cancelled event", Toast.LENGTH_SHORT).show();
+                    Intent editIntent = new Intent(EventDisplay.this, HomeActivity.class);
+                    startActivity(editIntent);
+                }
+
             }
         });
     }

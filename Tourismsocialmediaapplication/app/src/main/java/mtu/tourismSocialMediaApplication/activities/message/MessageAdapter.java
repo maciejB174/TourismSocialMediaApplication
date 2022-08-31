@@ -1,28 +1,29 @@
-package mtu.tourismSocialMediaApplication.activities.pastEvents;
+package mtu.tourismSocialMediaApplication.activities.message;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
 
-import mtu.tourismSocialMediaApplication.Objects.Event;
-import mtu.tourismSocialMediaApplication.Objects.UserEvents;
+import java.time.LocalDateTime;
+
 import mtu.tourismSocialMediaApplication.R;
+import mtu.tourismSocialMediaApplication.database.Message;
+import mtu.tourismSocialMediaApplication.database.MessageList;
 
 class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
+    private MessageList messages = MessageList.getInstance();
     private LayoutInflater mInflater;
-    private UserEvents userEvents = UserEvents.getInstance();
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
     public MyRecyclerViewAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
-//        if (!events.checkReverse()){
-//            events.reverseOrder();
+//        if (!messages.checkReverse()){
+//            messages.reverseOrder();
 //        }
     }
 
@@ -36,15 +37,15 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.timeView.setText(userEvents.getPastEvents().get(position).getStartTime().toString());
-        holder.myTextView.setText(userEvents.getPastEvents().get(position).getTitle());
-        holder.descriptionView.setText(userEvents.getPastEvents().get(position).getDescription());
+        holder.timeView.setText(LocalDateTime.parse(messages.getMessageArrayList().get(position).getDate()).toString());
+        holder.myTextView.setText(messages.getMessageArrayList().get(position).getSender());
+        holder.descriptionView.setText(messages.getMessageArrayList().get(position).getContent());
     }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        return userEvents.getPastEvents().size();
+        return messages.getMessageArrayList().size();
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -66,8 +67,8 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
         }
     }
 
-    Event getItem(int id) {
-        return userEvents.getPastEvents().get(id);
+    Message getItem(int id) {
+        return messages.getMessageArrayList().get(id);
     }
 
     // allows clicks events to be caught

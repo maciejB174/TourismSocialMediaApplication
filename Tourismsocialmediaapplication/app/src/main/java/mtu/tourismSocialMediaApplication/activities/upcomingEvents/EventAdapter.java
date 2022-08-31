@@ -56,9 +56,9 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
         TextView descriptionView;
         ViewHolder(View itemView) {
             super(itemView);
-            descriptionView = itemView.findViewById(R.id.eventDescription);
-            timeView = itemView.findViewById(R.id.eventTime);
-            myTextView = itemView.findViewById(R.id.eventTitle);
+            descriptionView = itemView.findViewById(R.id.description);
+            timeView = itemView.findViewById(R.id.time);
+            myTextView = itemView.findViewById(R.id.title);
             itemView.setOnClickListener(this);
         }
 

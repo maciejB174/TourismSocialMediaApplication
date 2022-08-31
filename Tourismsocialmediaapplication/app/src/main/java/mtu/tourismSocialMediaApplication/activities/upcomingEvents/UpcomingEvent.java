@@ -49,7 +49,8 @@ public class UpcomingEvent extends AppCompatActivity implements MyRecyclerViewAd
     }
 
     public void OpenEvent(int position){
-        Event currentEvent = userEvents.getUserEvents().get(position);
+
+        Event currentEvent = userEvents.getUpcomingEvents().get(position);
         Intent intent = new Intent(this, EventDisplay.class);
         intent.putExtra("title", currentEvent.getTitle());
         startActivity(intent);

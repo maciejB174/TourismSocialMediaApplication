@@ -17,6 +17,7 @@
         android:layout_marginLeft="103dp"
         android:layout_marginTop="212dp"
         android:layout_marginBottom="50dp"
+        android:textColor="@color/white"
         android:background="@drawable/button_background"
         android:text="Signup"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,6 +67,7 @@
     <Button
         android:id="@+id/loginButton"
         android:layout_width="144dp"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
         android:background="@drawable/button_background"
@@ -84,19 +86,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
-    <TextView
-        android:id="@+id/forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginLeft="148dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginBottom="57dp"
-        android:text="forgot password"
-        app:layout_constraintBottom_toTopOf="@+id/signup_Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

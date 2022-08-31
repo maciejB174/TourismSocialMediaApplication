@@ -1,14 +1,9 @@
-package mtu.tourismSocialMediaApplication.activities.pastEvents;
+package mtu.tourismSocialMediaApplication.activities.suggestedEvents;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,11 +13,9 @@ import mtu.tourismSocialMediaApplication.Objects.Event;
 import mtu.tourismSocialMediaApplication.Objects.UserEvents;
 import mtu.tourismSocialMediaApplication.R;
 import mtu.tourismSocialMediaApplication.activities.eventDisplay.EventDisplay;
-//import mtu.tourismSocialMediaApplication.activities.rateEvent.EventRating;
-import mtu.tourismSocialMediaApplication.database.EventDetails;
 
-public class PastEvent extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
-    MyRecyclerViewAdapter adapter;
+public class SuggestedEvent extends AppCompatActivity implements mtu.tourismSocialMediaApplication.activities.suggestedEvents.MyRecyclerViewAdapter.ItemClickListener {
+    mtu.tourismSocialMediaApplication.activities.suggestedEvents.MyRecyclerViewAdapter adapter;
     UserEvents userEvents = UserEvents.getInstance();
 
     Button backButton;
@@ -32,10 +25,10 @@ public class PastEvent extends AppCompatActivity implements MyRecyclerViewAdapte
         super.onCreate(savedInstanceState);
         UserEvents userEvents = UserEvents.getInstance();
         userEvents.setUpcomingAndPastEvents();
-        setContentView(R.layout.activity_past_event);
+        setContentView(R.layout.suggested_event);
         RecyclerView recyclerView = findViewById(R.id.item);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyRecyclerViewAdapter(this);
+        adapter = new mtu.tourismSocialMediaApplication.activities.suggestedEvents.MyRecyclerViewAdapter(this);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
@@ -53,7 +46,7 @@ public class PastEvent extends AppCompatActivity implements MyRecyclerViewAdapte
     }
 
     public void OpenEvent(int position){
-        Event currentEvent = userEvents.getPastEvents().get(position);
+        Event currentEvent = userEvents.returnSuggestedEvents().get(position);
         Intent intent = new Intent(this, EventDisplay.class);
         intent.putExtra("title", currentEvent.getTitle());
         startActivity(intent);

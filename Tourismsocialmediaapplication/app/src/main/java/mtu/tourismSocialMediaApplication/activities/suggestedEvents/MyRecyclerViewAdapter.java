@@ -1,4 +1,4 @@
-package mtu.tourismSocialMediaApplication.activities.pastEvents;
+package mtu.tourismSocialMediaApplication.activities.suggestedEvents;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -36,15 +36,15 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.timeView.setText(userEvents.getPastEvents().get(position).getStartTime().toString());
-        holder.myTextView.setText(userEvents.getPastEvents().get(position).getTitle());
-        holder.descriptionView.setText(userEvents.getPastEvents().get(position).getDescription());
+        holder.timeView.setText(userEvents.returnSuggestedEvents().get(position).getStartTime().toString());
+        holder.myTextView.setText(userEvents.returnSuggestedEvents().get(position).getTitle());
+        holder.descriptionView.setText(userEvents.returnSuggestedEvents().get(position).getDescription());
     }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        return userEvents.getPastEvents().size();
+        return userEvents.returnSuggestedEvents().size();
     }
 
     // stores and recycles views as they are scrolled off screen

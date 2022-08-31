@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -100,6 +101,7 @@ public class CreateEvent2 extends AppCompatActivity {
                 eventDetails.writeEventDetails(event);
 
                 Intent intent = new Intent(CreateEvent2.this, HomeActivity.class);
+                Toast.makeText(CreateEvent2.this, "Successfully added event", Toast.LENGTH_SHORT);
                 startActivity(intent);
             }
         });

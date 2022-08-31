@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mtu.tourismSocialMediaApplication" >
+    package="mtu.tourismSocialMediaApplication">
+
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -8,7 +12,15 @@
         android:label="Tourism Social Media Application"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TourismSocialMediaApplication" >
+        android:theme="@style/Theme.TourismSocialMediaApplication">
+        <activity
+            android:name=".activities.editEvent.EditEvent"
+            android:exported="false"
+            android:label="@string/title_activity_edit_event"
+            android:theme="@style/Theme.TourismSocialMediaApplication.NoActionBar" />
+        <activity
+            android:name=".activities.message.ChatActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.upcomingEvents.UpcomingEvent"
             android:exported="false" />
@@ -29,6 +41,9 @@
             android:exported="false" />
         <activity
             android:name=".activities.home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.suggestedEvents.SuggestedEvent"
             android:exported="false" />
         <activity
             android:name=".activities.signUp.SignUp"
@@ -54,7 +69,7 @@
         <activity
             android:name=".activities.login.LoginActivity"
             android:exported="true"
-            android:label="Login" >
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

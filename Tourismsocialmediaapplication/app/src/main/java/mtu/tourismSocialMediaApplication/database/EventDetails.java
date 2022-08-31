@@ -24,6 +24,7 @@ public class EventDetails {
     public Event currentEvent;
     public UserEvents userEventList = UserEvents.getInstance();
 
+
     public EventDetails() {
     }
 
@@ -49,6 +50,7 @@ public class EventDetails {
 
     public void readAllEvents(final OnGetDataListener listener) {
         DatabaseReference ref = firebaseDatabase.getReference("events/");
+        allEvents.clear();
         listener.onStart();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -61,11 +63,17 @@ public class EventDetails {
                     event.setLatitude(postSnapshot.child("latitude").getValue(Double.class));
                     event.setLongitude(postSnapshot.child("longitude").getValue(Double.class));
                     event.setStartTime(LocalDateTime.parse(postSnapshot.child("startTime").getValue(String.class)));
+                    ArrayList<String> attendees = new ArrayList<String>();
+                    for (DataSnapshot attendeeSnapshot : postSnapshot.child("attendees").getChildren()) {
+                        attendees.add(attendeeSnapshot.getValue(String.class));
+                    }
+                    event.setAttendees(attendees);
 //                    event.setEndTime(LocalDateTime.parse(postSnapshot.child("endTime").getValue(String.class)));
                     ArrayList<String> tags = new ArrayList<>();
                     for (DataSnapshot tagsSnapshot : postSnapshot.child("tags").getChildren()) {
                         tags.add(tagsSnapshot.getValue(String.class));
                     }
+                    event.setTags(tags);
                     allEvents.add(event);
                 }
                 listener.onSuccess();
@@ -92,6 +100,12 @@ public class EventDetails {
                         event.setLongitude(postSnapshot.child("longitude").getValue(Double.class));
                         event.setStartTime(LocalDateTime.parse(postSnapshot.child("startTime").getValue(String.class)));
 //                        event.setEndTime(LocalDateTime.parse(postSnapshot.child("endTime").getValue(String.class)));
+                        ArrayList<String> attendees = new ArrayList<String>();
+                        for (DataSnapshot attendeeSnapshot : postSnapshot.child("attendees").getChildren()) {
+                            attendees.add(attendeeSnapshot.getValue(String.class));
+                        }
+                        event.setAttendees(attendees);
+//                    event.setEndTime(LocalDateTime.parse(postSnapshot.child("endTime").getValue(String.class)));
                         ArrayList<String> tags = new ArrayList<>();
                         for (DataSnapshot tagsSnapshot : postSnapshot.child("tags").getChildren()) {
                             tags.add(tagsSnapshot.getValue(String.class));
@@ -114,6 +128,8 @@ public class EventDetails {
             @Override
             public void onSuccess() {
                 eventReference.child(String.valueOf(event.title)).child("attendees").child("" + event.getNoAttendees() + 1).setValue(email);
+                UserEvents userEventList = UserEvents.getInstance();
+                userEventList.findUserEvents();
             }
 
             @Override
@@ -127,6 +143,26 @@ public class EventDetails {
             }
         });
 
+    }
+
+    public void signOutUser(Event event, String email, final OnGetDataListener listener) {
+        listener.onStart();
+        DatabaseReference ref = firebaseDatabase.getReference("events/" + event.getTitle() + "/attendees/");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    if (postSnapshot.getValue().equals(email)) {
+                        postSnapshot.getRef().removeValue();
+                        listener.onSuccess();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onFailed();
+            }
+        });
     }
 
     public void getAttendees(Event event, final OnGetDataListener listener) {
@@ -158,9 +194,10 @@ public class EventDetails {
         findUserEvents(userEvents, email, new OnGetDataListener() {
             @Override
             public void onSuccess() {
-                for (int i = 0; i < userEvents.size(); i ++) {
-                    System.out.println(userEvents.get(i));
-                }
+                System.out.println("Retrieving Events : Success");
+                UserEvents userEventList = UserEvents.getInstance();
+                userEventList.setUserEvents(userEvents);
+                userEventList.determineBestTags();
             }
 
             @Override
@@ -179,6 +216,7 @@ public class EventDetails {
     public void findUserEvents(ArrayList<Event> userEvents, String email, final OnGetDataListener listener) {
         DatabaseReference ref = firebaseDatabase.getReference("events/");
         listener.onStart();
+        userEvents.clear();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -211,6 +249,22 @@ public class EventDetails {
             }
         });
     }
+
+    public void editEvent(String title, String description, String admissionRate) {
+        DatabaseReference ref = firebaseDatabase.getReference("events/" + title + "/");
+        ref.child("description").setValue(description);
+        ref.child("admissionRate").setValue(admissionRate);
+    }
+
+    public void cancelEvent(String title) {
+        DatabaseReference ref = firebaseDatabase.getReference("events/");
+        ref.child(title).removeValue();
+    }
+
+//    public void sendRating(String title, float rating) {
+//
+//        eventReference.child(String.valueOf(title)).child("rating").setValue(email);
+//    }
 
     public ArrayList<Event> getAllEvents() {
         return this.allEvents;
